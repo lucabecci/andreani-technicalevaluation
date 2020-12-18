@@ -1,9 +1,19 @@
 import express, { Application } from "express";
+import ApiRouter from "./routes/api.routes";
 
 class App {
-    _app: Application
+    private _app: Application
+    private _apiRouter: ApiRouter 
+
     constructor(){
         this._app = express()
+        this._apiRouter = new ApiRouter
+
+        this.initRoutes()
+    }
+
+    public initRoutes(){
+        this._app.use('/', this._apiRouter._router)
     }
 
     public run(): void {
