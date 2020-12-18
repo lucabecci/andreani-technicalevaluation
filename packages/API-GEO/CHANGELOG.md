@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [0.3.0](https://github.com/lucabecci/andreani-technicalevaluation/compare/v0.2.0...v0.3.0) (2020-12-18)
+
+
+### Features
+
+* **services/api-geo:** implement initial route and controller of the api ([3f0fc35](https://github.com/lucabecci/andreani-technicalevaluation/commit/3f0fc35cfc2dcc99908c7a149815da0976541db6))
+
+
+
+
+
 # [0.2.0](https://github.com/lucabecci/andreani-technicalevaluation/compare/v0.1.0...v0.2.0) (2020-12-18)
 
 
