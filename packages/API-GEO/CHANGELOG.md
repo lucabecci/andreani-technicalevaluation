@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [0.4.0](https://github.com/lucabecci/andreani-technicalevaluation/compare/v0.3.0...v0.4.0) (2020-12-19)
+
+
+### Features
+
+* **@services/api-geo:** rabbitMQ config, object and connection added ([e21f20c](https://github.com/lucabecci/andreani-technicalevaluation/commit/e21f20cc2baff203719956d2cfd97637060a0755))
+
+
+
+
+
 # [0.3.0](https://github.com/lucabecci/andreani-technicalevaluation/compare/v0.2.0...v0.3.0) (2020-12-18)
 
 
