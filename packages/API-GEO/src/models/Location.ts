@@ -1,9 +1,12 @@
 import { Schema, model, Document, SchemaDefinition } from "mongoose";
 
 interface ILocation extends Document {
-  title: string;
-  descriptiton: string;
-  priority: number;
+  calle: string
+  numero: number
+  ciudad: string
+  codigo_postal: number
+  provincia: string
+  pais: string
 }
 
 class LocationSchema {
@@ -12,9 +15,12 @@ class LocationSchema {
 
   constructor() {
     this._schemaDefiniton = {
-      title: { type: String, required: true, length: 20 },
-      description: { type: String, required: true, length: 80 },
-      priority: { type: Number, required: true, default: 3 },
+      calle: {type: String, required: true},
+      numero: {type: Number, required: true, default: 0},
+      ciudad: {type: String, required: true},
+      codigo_postal: {type: Number, required: true, default: 0},
+      provincia: {type: String, required: true},
+      pais: {type: String, required: true}
     };
     this._locationSchema = new Schema(this._schemaDefiniton, { timestamps: true });
   }

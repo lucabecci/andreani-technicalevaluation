@@ -1,8 +1,10 @@
 import { Channel } from 'amqplib'
 import {Request, Response} from 'express'
+
+
 import { connectionBroker, sendMessage } from '../rabbitmq'
 import {checkCamps} from '../helpers/check'
-
+import Location from '../models/Location'
 class ApiController {
 
     public index(_req: Request, res: Response) {
@@ -28,20 +30,20 @@ class ApiController {
                 message: 'Please send all camps'
             })
         }
-        const info = {
+        const location = new Location({
             calle,
             numero,
             ciudad,
             codigo_postal,
             provincia,
             pais
-        }
+        })
 
         const channel: Channel | undefined = await connectionBroker('test')
 
-        await sendMessage(info, 'test', channel! )
+        await sendMessage(location, 'test', channel! )
 
-        return res.json({info})
+        return res.json({location})
     }
 }
 

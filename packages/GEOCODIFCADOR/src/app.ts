@@ -24,8 +24,8 @@ class App {
     }
 
     public run(): void {
-        this._app.listen(4000, () => {
-            console.log('Server on port =>', 4000)
+        this._app.listen(4001, () => {
+            console.log('Server on port =>', 4001)
         })
     }
 }
