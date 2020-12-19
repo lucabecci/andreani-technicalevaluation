@@ -1,7 +1,10 @@
+import { Channel } from 'amqplib'
 import {Request, Response} from 'express'
+import { connectionBroker, sendMessage } from '../rabbitmq'
 import {checkCamps} from '../helpers/check'
 
 class ApiController {
+
     public index(_req: Request, res: Response) {
         res.status(200).json({
             ok: true,
@@ -12,7 +15,7 @@ class ApiController {
         })
     }
 
-    public post(req: Request, res: Response): Response{
+    public async post(req: Request, res: Response): Promise<Response>{
         const {calle, numero, ciudad, codigo_postal, provincia, pais} = req.body
 
         const checked = checkCamps(
@@ -25,8 +28,20 @@ class ApiController {
                 message: 'Please send all camps'
             })
         }
-        
-        return res.send('hello')
+        const info = {
+            calle,
+            numero,
+            ciudad,
+            codigo_postal,
+            provincia,
+            pais
+        }
+
+        const channel: Channel | undefined = await connectionBroker('test')
+
+        await sendMessage(info, 'test', channel! )
+
+        return res.json({info})
     }
 }
 

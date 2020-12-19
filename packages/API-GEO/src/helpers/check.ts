@@ -12,7 +12,7 @@ export function checkCamps(
         ciudad== null|| 
         codigo_postal== null|| 
         provincia== null|| 
-        pais
+        pais == null
         ) {return true}
         else {
             return false
