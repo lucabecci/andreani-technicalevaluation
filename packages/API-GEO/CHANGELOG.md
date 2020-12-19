@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [0.5.0](https://github.com/lucabecci/andreani-technicalevaluation/compare/v0.4.0...v0.5.0) (2020-12-19)
+
+
+### Features
+
+* **all:** routes, controller and struct of geo added ([9ddc12b](https://github.com/lucabecci/andreani-technicalevaluation/commit/9ddc12b39f7a280449c6c7777b26b0ed75272e1b))
+
+
+
+
+
 # [0.4.0](https://github.com/lucabecci/andreani-technicalevaluation/compare/v0.3.0...v0.4.0) (2020-12-19)
 
 
