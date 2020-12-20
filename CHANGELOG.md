@@ -3,6 +3,22 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [0.8.0](https://github.com/lucabecci/andreani-technicalevaluation/compare/v0.7.0...v0.8.0) (2020-12-20)
+
+
+### Bug Fixes
+
+* **all:** author information added ([9158a18](https://github.com/lucabecci/andreani-technicalevaluation/commit/9158a184e07023b59aa0098f16a0674be987e355))
+
+
+### Features
+
+* **all:** system dockerizated and finished ([57efd01](https://github.com/lucabecci/andreani-technicalevaluation/commit/57efd01bd0ae93b6be3980a5cf84d6c37281253e))
+
+
+
+
+
 # [0.7.0](https://github.com/lucabecci/andreani-technicalevaluation/compare/v0.6.0...v0.7.0) (2020-12-20)
 
 
