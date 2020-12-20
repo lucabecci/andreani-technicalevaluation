@@ -3,16 +3,22 @@ import GeoLocation from "./models/GeoLocation";
 
 export async function connectionBroker(queue: string){
   try {
-    const connection = await amqp.connect({
-      protocol: 'amqp',
-      hostname: 'localhost',
-      port: 5672,
-      username: 'guest',
-      password: 'guest',
-      vhost: '/'
-    });
-
-    const channel = await connection.createChannel();
+    let connection: amqp.Connection;
+    let retries = 5;
+    while(retries){
+      try{
+        connection = await amqp.connect('amqp://rabbitmq');
+        console.log(`rabbitMQ for send initial messages is connected. Retries left: ${retries}`)
+        break
+      }
+      catch(e){
+        console.log('rabbitMQ for send initial messages is not connected')
+        retries -= 1
+        //wait 5 seconds
+        await new Promise((res) => setTimeout(res, 5000));
+      }
+    }
+    const channel = await connection!.createChannel();
 
     await channel.assertQueue(queue);
 
@@ -33,7 +39,7 @@ export async function sendMessage(
     await channel.sendToQueue(queue, Buffer.from(JSON.stringify([info])));
     console.log("sending");
   } catch (e) {
-    console.log(e);
+    console.log('not connected of rabbitMQ')
   }
 
   channel.close()
@@ -42,16 +48,21 @@ export async function sendMessage(
 export async function listenerFinalMessage(
   queue: string,
 ): Promise<void> {
-  const connection = await amqp.connect({
-    protocol: 'amqp',
-    hostname: 'localhost',
-    port: 5672,
-    username: 'guest',
-    password: 'guest',
-    vhost: '/'
-  });
-
-  const channel = await connection.createChannel();
+  let connection: amqp.Connection;
+  let retries = 5;
+  while(retries){
+    try{
+      connection = await amqp.connect('amqp://rabbitmq');
+      console.log(`rabbitMQ for final messages is connected. Retries left: ${retries}`)
+      break
+    }
+    catch(e){
+      console.log('rabbitMQ for final messages is not connected')
+      retries -= 1
+      await new Promise((res) => setTimeout(res, 5000));
+    }
+  }
+  const channel = await connection!.createChannel();
 
   await channel.assertQueue(queue);
 

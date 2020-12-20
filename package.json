@@ -6,7 +6,8 @@
   "scripts": {
     "test": "lerna run test --scope={@walnut/common,@walnut/server}",
     "new-version": "lerna version --conventional-commits --yes",
-    "diff": "lerna diff"
+    "diff": "lerna diff",
+    "prod": "lerna run create:prod"
   },
   "name": "andreani-technicalevaluation",
   "version": "1.0.0",

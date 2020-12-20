@@ -6,7 +6,7 @@
   "scripts": {
     "start:dev": "ts-node-dev src/index.ts",
     "start:prod": "node dist/index.js",
-    "create:prod": "tsc"
+    "create:prod": "yarn run tsc"
   },
   "dependencies": {
     "amqplib": "^0.6.0",

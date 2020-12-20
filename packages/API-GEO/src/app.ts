@@ -11,7 +11,7 @@ class App {
     private _apiRouter: ApiRouter 
     constructor(){
         this._app = express()
-        this._database = new Database('mongodb://localhost/andreani')
+        this._database = new Database('mongodb://mongo:27017/andreani')
         this._apiRouter = new ApiRouter
 
         this.initRabbit()

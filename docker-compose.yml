@@ -1,0 +1,35 @@
+version: "3"
+
+services:      
+    api: 
+        container_name: "api"
+        restart: "always"
+        build: ./packages/API-GEO
+        ports: 
+            - "4000:4000"
+        links: 
+            - mongo
+            - rabbitmq
+
+    geo: 
+        container_name: "geo"
+        restart: "always"
+        build: ./packages/GEOCODIFCADOR
+        ports: 
+            - "4001:4001"
+        links: 
+            - rabbitmq
+    
+    mongo:
+        container_name: mongo
+        image: mongo
+        ports: 
+            - 27017:27017
+
+    rabbitmq:
+        container_name: rabbit
+        hostname: my-rabbit
+        image: rabbitmq:3.7.4
+        ports:
+            - 5672:5672
+            - 15672:15672
