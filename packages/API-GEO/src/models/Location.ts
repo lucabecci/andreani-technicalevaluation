@@ -1,6 +1,7 @@
 import { Schema, model, Document, SchemaDefinition } from "mongoose";
 
-interface ILocation extends Document {
+export interface ILocation extends Document {
+  _id?: string
   calle: string
   numero: number
   ciudad: string
@@ -26,6 +27,6 @@ class LocationSchema {
   }
 }
 
-const taskSchema = new LocationSchema();
+const locationSchema = new LocationSchema();
 
-export default model<ILocation>("Location", taskSchema._locationSchema);
+export default model<ILocation>("Location", locationSchema._locationSchema);

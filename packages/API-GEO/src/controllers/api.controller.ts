@@ -4,7 +4,8 @@ import {Request, Response} from 'express'
 
 import { connectionBroker, sendMessage } from '../rabbitmq'
 import {checkCamps} from '../helpers/check'
-import Location from '../models/Location'
+import Location, {ILocation} from '../models/Location'
+import GeoLocation, { IGeoLocation } from '../models/GeoLocation'
 class ApiController {
 
     public index(_req: Request, res: Response) {
@@ -30,7 +31,7 @@ class ApiController {
                 message: 'Please send all camps'
             })
         }
-        const location = new Location({
+        const location: ILocation = new Location({
             calle,
             numero,
             ciudad,
@@ -39,11 +40,33 @@ class ApiController {
             pais
         })
 
+        const geoLocation: IGeoLocation = new GeoLocation({
+            location_id: location._id
+        })
+        await geoLocation.save()
+        await location.save()
+
         const channel: Channel | undefined = await connectionBroker('test')
 
-        await sendMessage(location, 'test', channel! )
+        await sendMessage(location, 'initial', channel! )
 
-        return res.json({location})
+        return res.json(location._id)
+    }
+
+    public async getGeoLocalitation(req: Request, res: Response): Promise<Response>{
+        const locationID = req.params.id;
+        try{
+            const location = await GeoLocation.findOne({location_id: locationID})
+            return res.status(202).json({
+                location
+            })
+        }
+        catch(e){
+            return res.status(400).json({
+                ok: false,
+                message: 'ID not found, please send a valid ID'
+            })
+        }
     }
 }
 
