@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [0.9.0](https://github.com/lucabecci/andreani-technicalevaluation/compare/v0.8.0...v0.9.0) (2020-12-21)
+
+
+### Features
+
+* **all:** more readable code and vars configurated ([555d9ff](https://github.com/lucabecci/andreani-technicalevaluation/commit/555d9ff7523c25a5e9f324d1406eda52143295fe))
+
+
+
+
+
 # [0.8.0](https://github.com/lucabecci/andreani-technicalevaluation/compare/v0.7.0...v0.8.0) (2020-12-20)
 
 
