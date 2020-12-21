@@ -6,15 +6,18 @@ import { connectionBroker, sendMessage } from '../rabbitmq'
 import {checkCamps} from '../helpers/check'
 import Location, {ILocation} from '../models/Location'
 import GeoLocation, { IGeoLocation } from '../models/GeoLocation'
+import config from '../config/config'
 class ApiController {
 
     public index(_req: Request, res: Response) {
         res.status(200).json({
-            ok: true,
-            message: 'Hi, this is a api created with Luca Becci, if you need more information of me please use the path /creator',
-            usage: 'Use the path(post) location for the usage',
-            creator_path: 'http://localhost:4000/creator',
-            location_path_post: 'http://localhost:4000/location'
+            mensaje: 'Hola, esta es una API RESTUFL creada por Luca Becci para la prueba tecnica de andreani 2020.',
+            linkedin: 'https://www.linkedin.com/in/luca-becci-b8044b198/',
+            github: 'https://github.com/lucabecci',
+            tecnologias: ['Typescript', 'Node.JS', 'Express', 'MongoDB', 'Docker', 'RabbitMQ', 'Mongoose', 'Lerna', 'Morgan'],
+            uso: 'Use el endpoint "geolocalizar" mediante POST para poder enviar la informacion al servicio GEOCODIFICADOR, luego de eso usted recibira un ID como respuesta. Cuando usted tenga ese ID debera utilizarlo en el endpoint "geocodificar/(su id)" para asi obtener la respuesta final con la informacion del id, la latitud, la longitud y el estado.. ',
+            endpoint_post: 'http://localhost:4000/geolocalizar',
+            endpoint_get: 'http://localhost:4000/geocodificar/id'
         })
     }
 
@@ -46,9 +49,9 @@ class ApiController {
         await geoLocation.save()
         await location.save()
 
-        const channel: Channel | undefined = await connectionBroker('test')
+        const channel: Channel | undefined = await connectionBroker(config.AMQP_INITIAL)
 
-        await sendMessage(location, 'initial', channel! )
+        await sendMessage(location, config.AMQP_INITIAL, channel! )
 
         return res.json(location._id)
     }
@@ -58,7 +61,10 @@ class ApiController {
         try{
             const location = await GeoLocation.findOne({location_id: locationID})
             return res.status(202).json({
-                location
+                id: location?.location_id,
+                latitud: location?.lat,
+                longitud: location?.lon,
+                estado: location?.state
             })
         }
         catch(e){

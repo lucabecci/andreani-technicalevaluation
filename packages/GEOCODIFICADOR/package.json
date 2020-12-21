@@ -10,7 +10,8 @@
   },
   "dependencies": {
     "amqplib": "^0.6.0",
-    "axios": "^0.21.0"
+    "axios": "^0.21.0",
+    "dotenv": "^8.2.0"
   },
   "devDependencies": {
     "@types/amqplib": "^0.5.16",

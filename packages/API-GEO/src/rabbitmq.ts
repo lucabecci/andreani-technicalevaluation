@@ -1,4 +1,5 @@
 import * as amqp from "amqplib";
+import config from "./config/config";
 import GeoLocation from "./models/GeoLocation";
 
 export async function connectionBroker(queue: string){
@@ -7,7 +8,7 @@ export async function connectionBroker(queue: string){
     let retries = 5;
     while(retries){
       try{
-        connection = await amqp.connect('amqp://rabbitmq');
+        connection = await amqp.connect(config.AMQP_URI);
         console.log(`rabbitMQ for send initial messages is connected. Retries left: ${retries}`)
         break
       }
@@ -37,7 +38,6 @@ export async function sendMessage(
 ): Promise<void> {
   try {
     await channel.sendToQueue(queue, Buffer.from(JSON.stringify([info])));
-    console.log("sending");
   } catch (e) {
     console.log('not connected of rabbitMQ')
   }
@@ -47,17 +47,18 @@ export async function sendMessage(
 
 export async function listenerFinalMessage(
   queue: string,
+  uri: string
 ): Promise<void> {
   let connection: amqp.Connection;
   let retries = 5;
   while(retries){
     try{
-      connection = await amqp.connect('amqp://rabbitmq');
-      console.log(`rabbitMQ for final messages is connected. Retries left: ${retries}`)
+      connection = await amqp.connect(uri);
+      console.log(`rabbitMQ for final messages is connected`)
       break
     }
     catch(e){
-      console.log('rabbitMQ for final messages is not connected')
+      console.log(`rabbitMQ for final messages is not connected. Retries left: ${retries}`)
       retries -= 1
       await new Promise((res) => setTimeout(res, 5000));
     }
@@ -77,6 +78,5 @@ export async function listenerFinalMessage(
       location_id: id
     })
     channel.ackAll()
-    console.log('updated with the new information')
   })
 }

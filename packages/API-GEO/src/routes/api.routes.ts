@@ -14,8 +14,8 @@ class ApiRouter {
 
     private routes(){
         this._router.get('/', this._apiController.index)
-        this._router.post('/', this._apiController.post)
-        this._router.get('/:id', this._apiController.getGeoLocalitation)
+        this._router.post('/geolocalizar', this._apiController.post)
+        this._router.get('/geocodificar/:id', this._apiController.getGeoLocalitation)
     }
 }
 

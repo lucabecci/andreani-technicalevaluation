@@ -1,4 +1,5 @@
 import amqp from 'amqplib'
+import config from './config/config';
 
 export async function sendMessage(lat: string, id: string, lon: string){
     try{
@@ -6,12 +7,12 @@ export async function sendMessage(lat: string, id: string, lon: string){
         let retries = 5;
         while(retries){
             try{
-                connection = await amqp.connect('amqp://rabbitmq');
-                console.log(`rabbitMQ for send initial messages is connected. Retries left: ${retries}`)
+                connection = await amqp.connect(config.AMQP_URI);
+                console.log(`rabbitMQ for send initial messages is connected.`)
                 break
             }
             catch(e){
-                console.log('rabbitMQ for send initial messages is not connected')
+                console.log(`rabbitMQ for send initial messages is not connected. Retries left: ${retries}`)
                 retries -= 1
                 //wait 5 seconds
                 await new Promise((res) => setTimeout(res, 5000));
@@ -20,7 +21,7 @@ export async function sendMessage(lat: string, id: string, lon: string){
 
         const channel = await connection!.createChannel()
 
-         await channel.assertQueue('final')
+         await channel.assertQueue(config.AMQP_FINAL)
 
         //sending messages
         const info = {
@@ -29,7 +30,6 @@ export async function sendMessage(lat: string, id: string, lon: string){
             id: id
         }
         await channel.sendToQueue('final', Buffer.from(JSON.stringify([info])))
-        console.log('sending final message')
     }
     catch(e){
         console.log('not connected of rabbitMQ')

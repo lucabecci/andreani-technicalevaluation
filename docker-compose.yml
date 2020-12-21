@@ -14,7 +14,7 @@ services:
     geo: 
         container_name: "geo"
         restart: "always"
-        build: ./packages/GEOCODIFCADOR
+        build: ./packages/GEOCODIFICADOR
         ports: 
             - "4001:4001"
         links: 
