@@ -1,6 +1,6 @@
 # Andreani technical evaluation. 
 
-> This is a RESTFUL API developed for Andreani's technical evaluation. This API use Lerna for the monorepos(api and geocodificator service). For the Broken Message i use RabbitMQ.
+> This is a RESTFUL API developed for Andreani's technical evaluation. This API use Lerna for the monorepos(api and geocodificator service). For the Broker Message i use RabbitMQ.
 
 I used Typescript/Node.js/MongoDB/RabbitMQ
 
