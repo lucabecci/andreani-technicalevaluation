@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [0.10.0](https://github.com/lucabecci/andreani-technicalevaluation/compare/v0.9.0...v0.10.0) (2020-12-21)
+
+
+### Features
+
+* **all:** Husky added, prettier config added and doc added ([a8c2593](https://github.com/lucabecci/andreani-technicalevaluation/commit/a8c2593bbb5dc8c9f150208cfd4b2ab525c6e818))
+
+
+
+
+
 # [0.9.0](https://github.com/lucabecci/andreani-technicalevaluation/compare/v0.8.0...v0.9.0) (2020-12-21)
 
 
